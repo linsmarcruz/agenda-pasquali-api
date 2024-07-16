@@ -21,4 +21,9 @@ class ScheduleService extends AbstractCrudService
             $scheduleUpdateDTO
         );
     }
+
+    public function getByDateRange(array $filter): object|null
+    {
+        return $this->scheduleRepository->getByDateRange($filter);
+    }
 }

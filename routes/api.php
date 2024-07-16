@@ -11,6 +11,7 @@ Route::post('users/create_account', [UserController::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class);
+    Route::get('schedules/filter', [ScheduleController::class, 'filterByDateRange']);
     Route::apiResource('schedules', ScheduleController::class);
     Route::post('logout', [AuthController::class, 'logout']);
 });

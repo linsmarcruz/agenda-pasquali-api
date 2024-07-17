@@ -26,4 +26,10 @@ class ScheduleService extends AbstractCrudService
     {
         return $this->scheduleRepository->getByDateRange($filter);
     }
+
+    public function hasOverLappingSchedule(array $filter): bool
+    {
+        $data = $this->scheduleRepository->getByDateRange($filter);
+        return $data->total() > 0;
+    }
 }

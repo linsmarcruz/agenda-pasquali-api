@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Enums\StatusScheduleEnum;
-use App\Enums\TypeContactEnum;
+use App\Rules\NotWeekend;
+use App\Rules\ScheduleDateOverLap;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -50,12 +51,15 @@ class ScheduleRequest extends FormRequest
                 'start_date' => [
                     'required',
                     'date_format:Y-m-d H:i:s',
-                    'before_or_equal:due_date'
+                    'before_or_equal:due_date',
+                    new NotWeekend,
+                    new ScheduleDateOverLap($request->user(), $request->start_date, $request->due_date),
                 ],
                 'due_date' => [
                     'required',
                     'date_format:Y-m-d H:i:s',
-                    'after_or_equal:start_date'
+                    'after_or_equal:start_date',
+                    new NotWeekend
                 ],
                 'status' => [
                     'required',

@@ -1,3 +1,5 @@
+![Logo do Projeto](images/FA_Marca_Farmarcas_Web_ON.png)
+
 # Agenda Pasquali API
 
 Este projeto é uma API para gerenciamento de agendas, desenvolvida com Laravel 11 e MySQL 8.0. Ele permite criar, listar, atualizar e excluir eventos na agenda. Abaixo estão as instruções para configuração, execução e uso da API.

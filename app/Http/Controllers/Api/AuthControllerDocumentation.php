@@ -43,11 +43,13 @@ class AuthControllerDocumentation extends Controller
     public function auth()
     {
     }
+    
     /**
      * @OA\Post(
      *     path="/logout",
      *     tags={"Auth"},
      *     summary="Logout a user",
+     *     security={{"bearerAuth":{}}},
      *     description="Logs out a user and invalidates the access token",
      *     @OA\Response(
      *         response=200,

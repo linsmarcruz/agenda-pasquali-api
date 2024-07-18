@@ -12,6 +12,7 @@ class ScheduleControllerDocumentation extends Controller
      *     path="/schedules",
      *     tags={"Schedules"},
      *     summary="Display a listing of the schedules",
+     *     security={{"bearerAuth":{}}},
      *     description="Get all schedules",
      *     @OA\Response(
      *         response=200,
@@ -47,9 +48,10 @@ class ScheduleControllerDocumentation extends Controller
 
      /**
      * @OA\Get(
-     *     path="/api/schedules/{uuid}",
+     *     path="/schedules/{uuid}",
      *     tags={"Schedules"},
      *     summary="Display the specified schedule",
+     *     security={{"bearerAuth":{}}},
      *     description="Get a schedule by UUID",
      *     @OA\Parameter(
      *         name="uuid",
@@ -81,6 +83,7 @@ class ScheduleControllerDocumentation extends Controller
      *     path="/schedules/",
      *     tags={"Schedules"},
      *     summary="Store a new schedule in storage",
+     *     security={{"bearerAuth":{}}},
      *     description="Create a new schedule",
      *     @OA\RequestBody(
      *         required=true,
@@ -107,9 +110,10 @@ class ScheduleControllerDocumentation extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/schedules/{uuid}",
+     *     path="/schedules/{uuid}",
      *     tags={"Schedules"},
      *     summary="Update the specified schedule in storage",
+     *     security={{"bearerAuth":{}}},
      *     description="Update a schedule by UUID",
      *     @OA\Parameter(
      *         name="uuid",
@@ -142,9 +146,10 @@ class ScheduleControllerDocumentation extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/schedules/{uuid}",
+     *     path="/schedules/{uuid}",
      *     tags={"Schedules"},
      *     summary="Remove the specified schedule from storage",
+     *     security={{"bearerAuth":{}}},
      *     description="Delete a schedule by UUID",
      *     @OA\Parameter(
      *         name="uuid",

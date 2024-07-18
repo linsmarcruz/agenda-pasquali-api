@@ -130,7 +130,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/schedules": {
@@ -158,7 +163,12 @@
                     "401": {
                         "description": "Unauthorized"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/schedules/filter": {
@@ -190,14 +200,14 @@
                 ]
             }
         },
-        "/api/schedules/{uuid}": {
+        "/schedules/{uuid}": {
             "get": {
                 "tags": [
                     "Schedules"
                 ],
                 "summary": "Display the specified schedule",
                 "description": "Get a schedule by UUID",
-                "operationId": "7f8ed6f9c407feb0a8f2d7c310d91d65",
+                "operationId": "baa7ff955a62a1bf22a2b18499924e15",
                 "parameters": [
                     {
                         "name": "uuid",
@@ -226,7 +236,12 @@
                     "401": {
                         "description": "Unauthorized"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -234,7 +249,7 @@
                 ],
                 "summary": "Update the specified schedule in storage",
                 "description": "Update a schedule by UUID",
-                "operationId": "4665af8377235fb273df871342c090a8",
+                "operationId": "17c9b73fb3748b53711ea0ff15f3dbe2",
                 "parameters": [
                     {
                         "name": "uuid",
@@ -273,7 +288,12 @@
                     "401": {
                         "description": "Unauthorized"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -281,7 +301,7 @@
                 ],
                 "summary": "Remove the specified schedule from storage",
                 "description": "Delete a schedule by UUID",
-                "operationId": "8ba7acd8cad5c71410a56e2fb60a785f",
+                "operationId": "73697b53585074fc2c3ff6ca0f4d08ee",
                 "parameters": [
                     {
                         "name": "uuid",
@@ -303,7 +323,12 @@
                     "401": {
                         "description": "Unauthorized"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/schedules/": {
@@ -341,7 +366,257 @@
                     "401": {
                         "description": "Unauthorized"
                     }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Display a listing of the users",
+                "description": "Get all users",
+                "operationId": "d72266658f4fd9611967a2f1b9495b1c",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/{uuid}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Display the specified user",
+                "description": "Get a user by UUID",
+                "operationId": "d75a71b99a759946335d1a4e7c52b0f1",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update the specified user in storage",
+                "description": "Update a user by UUID",
+                "operationId": "be87cd450a770c30cc4f30a96b90d054",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Remove the specified user from storage",
+                "description": "Delete a user by UUID",
+                "operationId": "a8861c8dec6cd1a17b8fdf00815849a8",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "User deleted successfully"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/create_account": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Store a new user in storage",
+                "description": "Create a new user",
+                "operationId": "786c864be26611bd147c03f5a8299ca4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
                 }
+            }
+        },
+        "/users/": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Store a new user in storage",
+                "description": "Create a new user",
+                "operationId": "d11c3b9f4c384309f712c8e78bd06e4c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
@@ -398,6 +673,10 @@
         {
             "name": "Schedules",
             "description": "Schedules"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
         }
     ]
 }

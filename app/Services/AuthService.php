@@ -17,8 +17,9 @@ class AuthService
     public function auth(AuthRequest $request): array
     {
         $user = $this->userRepository->findByEmail($request->email);
-        $validPassword = Hash::check($request->password, $user->password ?? 0);
-        if ($validPassword === false) {
+
+        $validCredentials = $user !== null && Hash::check($request->password, $user->password ?? 0);
+        if ($validCredentials === false) {
             throw ValidationException::withMessages(['message' => 'The provide credentials are not correct.']);
         }
 

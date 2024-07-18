@@ -1,7 +1,6 @@
 <?php
 
 use App\Exceptions\ClassNotExistsException;
-use App\Exceptions\Handler;
 use App\Exceptions\InvalidParamsException;
 use App\Exceptions\InvalidTransactionException;
 use App\Exceptions\InvalidUuidException;

@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class UserRequest extends FormRequest
 {
-    const TYPE_RULE_CREATE = 'CREATE';
-    const TYPE_RULE_UPDATE = 'UPDATE';
     protected $typeRule;
 
     /**

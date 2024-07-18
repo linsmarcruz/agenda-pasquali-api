@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Abstracts\AbstractCrudController;
+use App\Http\Requests\ScheduleFilterRequest;
 use App\Http\Requests\ScheduleRequest;
 use App\Services\ScheduleService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use OpenApi\Annotations as OA;
 
 class ScheduleController extends AbstractCrudController
 {
@@ -21,22 +23,26 @@ class ScheduleController extends AbstractCrudController
         );
     }
 
-    public function filterByDateRange(Request $request)
+
+    /**
+     * @OA\Get(
+     *     path="/schedules/filter",
+     *     tags={"Schedules"},
+     *     summary="Get Schedules filtered by date range",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Schedule"))
+     *     )
+     * )
+     */
+    public function filterByDateRange(ScheduleFilterRequest $request)
     {
 
-        $params = self::setParams([
-            'start_date' => $request->start_date,
-            'due_date' => $request->due_date,
-            'user' => $request->user()
-        ], [
-            'start_date' => 'required|date|date_format:Y-m-d',
-            'due_date' => 'required|date|date_format:Y-m-d|after_or_equal:start_date',
-            'user' => 'required'
-        ]);
-        
-        self::validateParams($params);
+        $validatedData = $request->validated();
 
-        $data = $this->scheduleService->getByDateRange($params['values']);
+        $data = $this->scheduleService->getByDateRange($validatedData);
 
         return response()->json($data, Response::HTTP_OK);
     }

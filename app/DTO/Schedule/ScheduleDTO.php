@@ -10,7 +10,7 @@ class ScheduleDTO implements InterfaceDTO
     public function __construct(
         public string|null $uuid,
         public string $title,
-        public string $type,
+        public string $type_uuid,
         public string|null $description,
         public string $start_date,
         public string $due_date,
@@ -27,7 +27,7 @@ class ScheduleDTO implements InterfaceDTO
         return new self(
             $uuid,
             $request->title,
-            $request->type,
+            $request->type['uuid'],
             $request->description,
             $request->start_date,
             $request->due_date,

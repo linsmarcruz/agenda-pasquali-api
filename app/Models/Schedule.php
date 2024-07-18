@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Abstracts\AbstractModel;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use OpenApi\Annotations as OA;
 
 /**
@@ -11,7 +12,7 @@ use OpenApi\Annotations as OA;
  *     type="object",
  *     title="Schedule",
  *     properties={
- *         @OA\Property(property="id", type="integer"),
+ *         @OA\Property(property="uuid", type="integer"),
  *         @OA\Property(property="title", type="string"),
  *         @OA\Property(property="type", type="string"),
  *         @OA\Property(property="description", type="string"),
@@ -26,7 +27,7 @@ class Schedule extends AbstractModel
 {
     protected $fillable = [
         'title',
-        'type',
+        'type_uuid',
         'description',
         'user_id',
         'start_date',
@@ -37,5 +38,10 @@ class Schedule extends AbstractModel
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function type(): HasOne
+    {
+        return $this->hasOne(ScheduleType::class);
     }
 }

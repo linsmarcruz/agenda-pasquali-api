@@ -39,10 +39,9 @@ class ScheduleRequest extends FormRequest
                     'string',
                     'max:255'
                 ],
-                'type' => [
+                'type.uuid' => [
                     'required',
-                    'string',
-                    'max:255'
+                    'exists:schedule_types,uuid'
                 ],
                 'description' => [
                     'nullable',

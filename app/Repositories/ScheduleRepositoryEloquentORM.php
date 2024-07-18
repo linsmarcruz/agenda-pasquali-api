@@ -21,7 +21,6 @@ class ScheduleRepositoryEloquentORM extends AbstractRepositoryEloquentORM
                     ->orwhereBetween('due_date', [$filter['start_date'] . ' 00:00:00', $filter['due_date'] . ' 23:59:59']);
             })->paginate();
 
-        return $schedules
-        ;
+        return $schedules;
     }
 }

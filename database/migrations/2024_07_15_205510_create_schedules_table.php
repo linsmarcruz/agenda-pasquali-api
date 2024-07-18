@@ -15,13 +15,15 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->uuid('uuid')->primary();
             $table->string('title');
-            $table->string('type');
+            $table->uuid('type_uuid');
             $table->text('description')->nullable();
             $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->dateTime('start_date');
             $table->dateTime('due_date');
             $table->enum('status', StatusScheduleEnum::getAll())->default(StatusScheduleEnum::OPEN);
             $table->timestamps();
+
+            $table->foreign('type_uuid')->references('uuid')->on('schedule_types')->noActionOnDelete();
         });
     }
 

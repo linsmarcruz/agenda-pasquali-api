@@ -374,6 +374,213 @@
                 ]
             }
         },
+        "/scheduleTypes": {
+            "get": {
+                "tags": [
+                    "ScheduleTypes"
+                ],
+                "summary": "Display a listing of the scheduleTypes",
+                "description": "Get all scheduleTypes",
+                "operationId": "57ee339685138514f48a4677b136d909",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ScheduleType"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/scheduleTypes/{uuid}": {
+            "get": {
+                "tags": [
+                    "ScheduleTypes"
+                ],
+                "summary": "Display the specified scheduleType",
+                "description": "Get a scheduleType by UUID",
+                "operationId": "77e2b84f6d906f87936b3515a0a64f2f",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ScheduleType"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "ScheduleType not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "ScheduleTypes"
+                ],
+                "summary": "Update the specified scheduleType in storage",
+                "description": "Update a scheduleType by UUID",
+                "operationId": "0d607609d0cfcd2bfb4cccf128a54c1a",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ScheduleType"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ScheduleType updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ScheduleType"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "ScheduleType not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "ScheduleTypes"
+                ],
+                "summary": "Remove the specified scheduleType from storage",
+                "description": "Delete a scheduleType by UUID",
+                "operationId": "df171c0ff7c0225b9edba9a67069167f",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "ScheduleType deleted successfully"
+                    },
+                    "404": {
+                        "description": "ScheduleType not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/scheduleTypes/": {
+            "post": {
+                "tags": [
+                    "ScheduleTypes"
+                ],
+                "summary": "Store a new scheduleType in storage",
+                "description": "Create a new scheduleType",
+                "operationId": "23890e6f596283ce0800cae40d340cf0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ScheduleType"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "ScheduleType created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ScheduleType"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/users": {
             "get": {
                 "tags": [
@@ -625,7 +832,7 @@
             "Schedule": {
                 "title": "Schedule",
                 "properties": {
-                    "id": {
+                    "uuid": {
                         "type": "integer"
                     },
                     "title": {
@@ -654,6 +861,18 @@
                 },
                 "type": "object"
             },
+            "ScheduleType": {
+                "title": "ScheduleType",
+                "properties": {
+                    "uuid": {
+                        "type": "integer"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "User": {
                 "title": "User",
                 "properties": {
@@ -673,6 +892,10 @@
         {
             "name": "Schedules",
             "description": "Schedules"
+        },
+        {
+            "name": "ScheduleTypes",
+            "description": "ScheduleTypes"
         },
         {
             "name": "Users",

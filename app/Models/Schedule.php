@@ -14,7 +14,7 @@ use OpenApi\Annotations as OA;
  *     properties={
  *         @OA\Property(property="uuid", type="integer"),
  *         @OA\Property(property="title", type="string"),
- *         @OA\Property(property="type", type="string"),
+ *         @OA\Property(property="type", ref="#/components/schemas/ScheduleType"),
  *         @OA\Property(property="description", type="string"),
  *         @OA\Property(property="start_date", type="string", format="date-time"),
  *         @OA\Property(property="due_date", type="string", format="date-time"),
@@ -35,6 +35,8 @@ class Schedule extends AbstractModel
         'status',
     ];
 
+    protected $with = ['type'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -42,6 +44,6 @@ class Schedule extends AbstractModel
 
     public function type(): HasOne
     {
-        return $this->hasOne(ScheduleType::class);
+        return $this->hasOne(ScheduleType::class, 'uuid');
     }
 }

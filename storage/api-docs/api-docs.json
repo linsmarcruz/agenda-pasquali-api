@@ -839,7 +839,7 @@
                         "type": "string"
                     },
                     "type": {
-                        "type": "string"
+                        "$ref": "#/components/schemas/ScheduleType"
                     },
                     "description": {
                         "type": "string"

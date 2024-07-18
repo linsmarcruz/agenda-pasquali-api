@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\ScheduleType;
 use App\Repositories\Abstracts\AbstractRepositoryEloquentORM;
-use Illuminate\Database\Eloquent\Builder;
 
 class ScheduleTypeRepositoryEloquentORM extends AbstractRepositoryEloquentORM
 {

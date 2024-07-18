@@ -6,6 +6,7 @@ use App\Exceptions\InvalidTransactionException;
 use App\Exceptions\InvalidUuidException;
 use App\Exceptions\NoNewRecordsException;
 use App\Exceptions\NotDataFoundException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
@@ -45,14 +46,15 @@ return Application::configure(basePath: dirname(__DIR__))
                 NotFoundHttpException::class => ['message' => $exception->getMessage(), 'status' => Response::HTTP_NOT_FOUND],
                 ModelNotFoundException::class => ['message' => $model . ' - The register has been not found.', 'status' => Response::HTTP_NOT_FOUND],
                 QueryException::class => ['message' => 'Database error.', 'status' => Response::HTTP_INTERNAL_SERVER_ERROR],
+                AuthenticationException::class => ['message' => $exception->getMessage(), 'status' => Response::HTTP_UNAUTHORIZED],
+                InvalidTransactionException::class => formatReturn($exception),
+                ValidationException::class => formatReturn($exception),
                 // Custom Exceptions
                 InvalidUuidException::class => formatReturn($exception),
                 NotDataFoundException::class => formatReturn($exception),
                 ClassNotExistsException::class => formatReturn($exception),
                 NoNewRecordsException::class => formatReturn($exception),
                 InvalidParamsException::class => formatReturn($exception),
-                InvalidTransactionException::class => formatReturn($exception),
-                ValidationException::class => formatReturn($exception),
             ];
 
             if (array_key_exists(get_class($exception), $exceptionMappings)) {

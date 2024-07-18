@@ -190,44 +190,6 @@
                 ]
             }
         },
-        "/schedules/": {
-            "post": {
-                "tags": [
-                    "Schedules"
-                ],
-                "summary": "Store a new schedule in storage",
-                "description": "Create a new schedule",
-                "operationId": "778c547abee2c0937772de83e951ced8",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Schedule"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Schedule created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Schedule"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                }
-            }
-        },
         "/api/schedules/{uuid}": {
             "get": {
                 "tags": [
@@ -337,6 +299,44 @@
                     },
                     "404": {
                         "description": "Schedule not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/schedules/": {
+            "post": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "Store a new schedule in storage",
+                "description": "Create a new schedule",
+                "operationId": "778c547abee2c0937772de83e951ced8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Schedule"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Schedule created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Schedule"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
                     },
                     "401": {
                         "description": "Unauthorized"

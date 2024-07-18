@@ -45,36 +45,7 @@ class ScheduleControllerDocumentation extends Controller
     {
     }
 
-    /**
-     * @OA\Post(
-     *     path="/schedules/",
-     *     tags={"Schedules"},
-     *     summary="Store a new schedule in storage",
-     *     description="Create a new schedule",
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/Schedule")
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Schedule created",
-     *         @OA\JsonContent(ref="#/components/schemas/Schedule")
-     *     ),
-     *     @OA\Response(
-     *         response=400,
-     *         description="Bad request"
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthorized"
-     *     )
-     * )
-     */
-    public function store()
-    {
-    }
-
-    /**
+     /**
      * @OA\Get(
      *     path="/api/schedules/{uuid}",
      *     tags={"Schedules"},
@@ -102,6 +73,35 @@ class ScheduleControllerDocumentation extends Controller
      * )
      */
     public function show()
+    {
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/schedules/",
+     *     tags={"Schedules"},
+     *     summary="Store a new schedule in storage",
+     *     description="Create a new schedule",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Schedule")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Schedule created",
+     *         @OA\JsonContent(ref="#/components/schemas/Schedule")
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
+     *     )
+     * )
+     */
+    public function store()
     {
     }
 

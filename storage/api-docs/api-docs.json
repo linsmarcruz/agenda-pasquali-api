@@ -26,7 +26,7 @@
                 ],
                 "summary": "Authenticate a user",
                 "description": "Authenticates a user and returns an access token",
-                "operationId": "b1692ef3ef959053656e6eb7413ced59",
+                "operationId": "899c7e29aa89fd17a16be2db69dbd4d3",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -96,7 +96,7 @@
                 ],
                 "summary": "Logout a user",
                 "description": "Logs out a user and invalidates the access token",
-                "operationId": "28d48c13fca984400ac8de99f54ee13a",
+                "operationId": "7cd9d70b1894ac8f20690166f5519691",
                 "responses": {
                     "200": {
                         "description": "Successful logout",
@@ -133,13 +133,41 @@
                 }
             }
         },
+        "/schedules": {
+            "get": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "Display a listing of the schedules",
+                "description": "Get all schedules",
+                "operationId": "6ccbed489d3289e614a87d7bb03adfb1",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Schedule"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
         "/schedules/filter": {
             "get": {
                 "tags": [
                     "Schedules"
                 ],
                 "summary": "Get Schedules filtered by date range",
-                "operationId": "0230af7c2dda15a7b75cd08413458f91",
+                "operationId": "c605afc823c7faeb8b50c97143aa00da",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -160,6 +188,160 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        },
+        "/schedules/": {
+            "post": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "Store a new schedule in storage",
+                "description": "Create a new schedule",
+                "operationId": "778c547abee2c0937772de83e951ced8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Schedule"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Schedule created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Schedule"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/schedules/{uuid}": {
+            "get": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "Display the specified schedule",
+                "description": "Get a schedule by UUID",
+                "operationId": "7f8ed6f9c407feb0a8f2d7c310d91d65",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Schedule"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Schedule not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "Update the specified schedule in storage",
+                "description": "Update a schedule by UUID",
+                "operationId": "4665af8377235fb273df871342c090a8",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Schedule"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Schedule updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Schedule"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Schedule not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "Remove the specified schedule from storage",
+                "description": "Delete a schedule by UUID",
+                "operationId": "8ba7acd8cad5c71410a56e2fb60a785f",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Schedule deleted successfully"
+                    },
+                    "404": {
+                        "description": "Schedule not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
             }
         }
     },

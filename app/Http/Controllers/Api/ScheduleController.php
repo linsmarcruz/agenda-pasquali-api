@@ -6,9 +6,7 @@ use App\Http\Controllers\Abstracts\AbstractCrudController;
 use App\Http\Requests\ScheduleFilterRequest;
 use App\Http\Requests\ScheduleRequest;
 use App\Services\ScheduleService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use OpenApi\Annotations as OA;
 
 class ScheduleController extends AbstractCrudController
 {
@@ -23,20 +21,6 @@ class ScheduleController extends AbstractCrudController
         );
     }
 
-
-    /**
-     * @OA\Get(
-     *     path="/schedules/filter",
-     *     tags={"Schedules"},
-     *     summary="Get Schedules filtered by date range",
-     *     security={{"bearerAuth":{}}},
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation",
-     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Schedule"))
-     *     )
-     * )
-     */
     public function filterByDateRange(ScheduleFilterRequest $request)
     {
 

@@ -69,9 +69,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json($messageError, $mapping['status']);
             }
 
-            return response()->json([
-                'message' => 'Server Error',
-                'status' => Response::HTTP_INTERNAL_SERVER_ERROR
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            $error = formatReturn($exception);
+            return response()->json($error, $error['status']);
         });
     })->create();

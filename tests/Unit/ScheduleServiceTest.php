@@ -3,6 +3,7 @@
 namespace Tests\Feature\Services;
 
 use App\Models\Schedule;
+use App\Models\ScheduleType;
 use App\Models\User;
 use App\Repositories\ScheduleRepositoryEloquentORM;
 use App\Services\ScheduleService;
@@ -12,7 +13,7 @@ use Tests\TestCase;
 
 class ScheduleServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     protected $scheduleService;
     protected $scheduleRepository;
@@ -28,10 +29,13 @@ class ScheduleServiceTest extends TestCase
     public function test_create_schedule()
     {
         $user = User::factory()->create();
+        $scheduleType = ScheduleType::factory()->create();
 
         $data = [
             'title' => 'title',
-            'type' => 'type',
+            'type' => [
+                'uuid' => $scheduleType->uuid
+            ],
             'description' => 'description',
             'start_date' => '2026-07-13 14:00:00',
             'due_date' => '2026-07-13 15:00:00',
@@ -48,6 +52,4 @@ class ScheduleServiceTest extends TestCase
         $this->assertInstanceOf(Schedule::class, $schedule);
         $this->assertEquals($data['title'], $schedule->title);
     }
-
-  
 }

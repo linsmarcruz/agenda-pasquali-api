@@ -35,15 +35,15 @@ class Schedule extends AbstractModel
         'status',
     ];
 
-    protected $with = ['type'];
+    // protected $with = ['type'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function type(): HasOne
-    {
-        return $this->hasOne(ScheduleType::class, 'uuid');
-    }
+    // public function type(): HasOne
+    // {
+    //     return $this->hasOne(ScheduleType::class, 'uuid');
+    // }
 }

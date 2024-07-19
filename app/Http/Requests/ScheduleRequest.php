@@ -31,9 +31,6 @@ class ScheduleRequest extends FormRequest
         if (in_array($request->method(), ['POST', 'PUT'])) {
             $rules = [
                 'uuid' => 'uuid',
-                'type' => [
-                    'required'
-                ],
                 'title' => [
                     'required',
                     'string',

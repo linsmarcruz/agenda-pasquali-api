@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ScheduleType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,9 +19,10 @@ class ScheduleFactory extends Factory
     public function definition(): array
     {
         $user = User::factory()->create();
+        $schedule_type = ScheduleType::factory()->create();
         return [
             'title' =>  fake()->name(),
-            'type' =>  fake()->name(),
+            'type_uuid' =>  $schedule_type->uuid,
             'description' =>  fake()->name(),
             'start_date' => now(),
             'due_date' => now(),

@@ -30,12 +30,14 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Throwable $exception, Request $request) {
-            function formatReturn(Throwable $exception): array
-            {
-                return  [
-                    'message' => $exception->getMessage(),
-                    'status' => isset($exception->status) ? $exception->status : Response::HTTP_INTERNAL_SERVER_ERROR
-                ];
+            if (function_exists('formatReturn') === false) {
+                function formatReturn(Throwable $exception): array
+                {
+                    return  [
+                        'message' => $exception->getMessage(),
+                        'status' => isset($exception->status) ? $exception->status : Response::HTTP_INTERNAL_SERVER_ERROR
+                    ];
+                }
             }
             $model = $exception instanceof ModelNotFoundException ? explode('\\', $exception->getModel()) : [];
             $model =  end($model);

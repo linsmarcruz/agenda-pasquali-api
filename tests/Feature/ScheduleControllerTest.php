@@ -5,6 +5,7 @@ namespace Tests\Feature\Controllers;
 use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class ScheduleControllerTest extends TestCase
@@ -19,10 +20,12 @@ class ScheduleControllerTest extends TestCase
 
         $data = [
             'title' => $schedule->title,
-            'type' => $schedule->type,
+            'type' => [
+                'uuid' => $schedule->type_uuid
+            ],
             'description' => $schedule->description,
-            'start_date' => $schedule->start_date->toDateTimeString(),
-            'due_date' => $schedule->due_date->toDateTimeString(),
+            'start_date' => '2026-07-10 14:00:00',
+            'due_date' => '2026-07-10 14:00:00',
             'status' => $schedule->status,
             'user' => [
                 'id' => $user->id
@@ -33,7 +36,7 @@ class ScheduleControllerTest extends TestCase
         $this->actingAs($user);
         $response = $this->postJson('/api/schedules', $data);
 
-        $response->assertStatus(201);
+        $response->assertStatus(Response::HTTP_CREATED);
         $this->assertDatabaseHas('schedules', ['title' => $schedule->title]);
     }
 
@@ -44,7 +47,7 @@ class ScheduleControllerTest extends TestCase
 
         $data = [
             'title' => $schedule->title,
-            'type' => $schedule->type,
+            'type_uuid' => $schedule->type_uuid,
             'description' => $schedule->description,
             'start_date' => $schedule->start_date->toDateTimeString(),
             'due_date' => $schedule->due_date->toDateTimeString(),
@@ -56,7 +59,9 @@ class ScheduleControllerTest extends TestCase
 
         $data = [
             'title' => $schedule->title,
-            'type' => $schedule->type,
+            'type' => [
+                'uuid' => $schedule->type_uuid
+            ],
             'description' => $schedule->description,
             'start_date' => $schedule->start_date->toDateTimeString(),
             'due_date' => $schedule->due_date->toDateTimeString(),
@@ -69,7 +74,7 @@ class ScheduleControllerTest extends TestCase
         $this->actingAs($user);
         $response = $this->postJson('/api/schedules', $data);
 
-        $response->assertStatus(422);
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         // $response->assertJsonValidationErrors(['start_date']);
     }
 }

@@ -1,0 +1,27 @@
+name: Check if base branch is included
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  check-base-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: Ensure the base branch is merged into the feature branch
+        run: |
+          git checkout ${{ github.event.pull_request.head.ref }}
+          git merge-base --is-ancestor origin/main ${{ github.event.pull_request.head.ref }}
+
+    # Verifica se a base está contida na branch da PR
+      - name: Check merge base
+        if: failure()
+        run: exit 1

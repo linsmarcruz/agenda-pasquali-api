@@ -1,4 +1,4 @@
-name: Check if base branch is included
+name: Check if the branch main has been included
 
 on:
   pull_request:
